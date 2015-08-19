@@ -102,7 +102,7 @@ public class MyViewPager extends ViewGroup {
 
     private final Rect mTempRect = new Rect();
 
-    private PagerAdapter mAdapter;
+    private MyPagerAdapter mAdapter;
     private int mCurItem;   // Index of currently displayed page.
     private int mRestoredCurItem = -1;
     private Parcelable mRestoredAdapterState = null;
@@ -297,7 +297,7 @@ public class MyViewPager extends ViewGroup {
      * Used internally to monitor when adapters are switched.
      */
     interface OnAdapterChangeListener {
-        public void onAdapterChanged(PagerAdapter oldAdapter, PagerAdapter newAdapter);
+        public void onAdapterChanged(MyPagerAdapter oldAdapter, MyPagerAdapter newAdapter);
     }
 
     /**
@@ -368,7 +368,7 @@ public class MyViewPager extends ViewGroup {
      *
      * @param adapter Adapter to use
      */
-    public void setAdapter(PagerAdapter adapter) {
+    public void setAdapter(MyPagerAdapter adapter) {
         if (mAdapter != null) {
             mAdapter.unregisterDataSetObserver(mObserver);
             mAdapter.startUpdate(this);
@@ -383,7 +383,7 @@ public class MyViewPager extends ViewGroup {
             scrollTo(0, 0);
         }
 
-        final PagerAdapter oldAdapter = mAdapter;
+        final MyPagerAdapter oldAdapter = mAdapter;
         mAdapter = adapter;
         mExpectedAdapterCount = 0;
 
@@ -431,7 +431,7 @@ public class MyViewPager extends ViewGroup {
      *
      * @return The currently registered PagerAdapter
      */
-    public PagerAdapter getAdapter() {
+    public MyPagerAdapter getAdapter() {
         return mAdapter;
     }
 
@@ -1057,7 +1057,7 @@ public class MyViewPager extends ViewGroup {
             }
 
             calculatePageOffsets(curItem, curIndex, oldCurInfo);
-        }
+        }//end if
 
         if (DEBUG) {
             Log.i(TAG, "Current page list:");
