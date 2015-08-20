@@ -56,7 +56,8 @@ public abstract class MyFragmentStatePagerAdapter extends MyPagerAdapter {
             mCurTransaction = mFragmentManager.beginTransaction();
         }
 
-        Fragment fragment = getItem(position);
+        Fragment fragment = getItem(position);//创建新的Fragment
+
         if (DEBUG) Log.v(TAG, "Adding item #" + position + ": f=" + fragment);
         if (mSavedState.size() > position) {
             Fragment.SavedState fss = mSavedState.get(position);

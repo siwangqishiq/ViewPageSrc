@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 public class MainActivity extends AppCompatActivity {
     private MyViewPager mViewPager;
@@ -19,6 +20,28 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout s;
         FragmentPagerAdapter s1;
+        ScrollView sw;
+
+
+        mViewPager.addOnPageChangeListener(new MyViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+//                System.out.println("measure-->" + mViewPager.getMeasuredWidth());
+//                System.out.println("width-->" + mViewPager.getWidth());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
     }
 
     private final class MyAdapter extends MyFragmentStatePagerAdapter {
