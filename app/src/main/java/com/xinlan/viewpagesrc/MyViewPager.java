@@ -54,7 +54,7 @@ import java.util.List;
 public class MyViewPager extends ViewGroup {
 
     private static final String TAG = "ViewPager";
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     private static final boolean USE_CACHE = false;
 
@@ -841,7 +841,6 @@ public class MyViewPager extends ViewGroup {
 
     void dataSetChanged() {
         // This method only gets called if our observer is attached, so mAdapter is non-null.
-
         final int adapterCount = mAdapter.getCount();
         mExpectedAdapterCount = adapterCount;
         boolean needPopulate = mItems.size() < mOffscreenPageLimit * 2 + 1 && mItems.size() < adapterCount;
@@ -1543,7 +1542,7 @@ public class MyViewPager extends ViewGroup {
                             childLeft = width - paddingRight - child.getMeasuredWidth();
                             paddingRight += child.getMeasuredWidth();
                             break;
-                    }
+                    }//end switch
                     switch (vgrav) {
                         default:
                             childTop = paddingTop;
@@ -1560,15 +1559,15 @@ public class MyViewPager extends ViewGroup {
                             childTop = height - paddingBottom - child.getMeasuredHeight();
                             paddingBottom += child.getMeasuredHeight();
                             break;
-                    }
+                    }//end switch
                     childLeft += scrollX;
                     child.layout(childLeft, childTop,
                             childLeft + child.getMeasuredWidth(),
                             childTop + child.getMeasuredHeight());
                     decorCount++;
                 }
-            }
-        }
+            }//end if  visible or invisible
+        }//end for i
 
         final int childWidth = width - paddingLeft - paddingRight;
         // Page views. Do this once we have the right padding offsets from above.
@@ -1601,7 +1600,7 @@ public class MyViewPager extends ViewGroup {
                             childTop + child.getMeasuredHeight());
                 }
             }
-        }
+        }//end for i
         mTopPageBounds = paddingTop;
         mBottomPageBounds = height - paddingBottom;
         mDecorChildCount = decorCount;

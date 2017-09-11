@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -17,11 +19,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mViewPager = (MyViewPager) findViewById(R.id.view_pager);
         mViewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
-
-        LinearLayout s;
-        FragmentPagerAdapter s1;
-        ScrollView sw;
-
 
         mViewPager.addOnPageChangeListener(new MyViewPager.OnPageChangeListener() {
             @Override
@@ -41,11 +38,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ImageView imgView;
+
+        FragmentPagerAdapter a;
 
     }
 
-    private final class MyAdapter extends MyFragmentStatePagerAdapter {
+    private final class MyAdapter2 extends FragmentStatePagerAdapter {
+        public MyAdapter2(FragmentManager fm) {
+            super(fm);
+        }
 
+        @Override
+        public Fragment getItem(int position) {
+            return ImageFragment.newInstance();
+        }
+
+        @Override
+        public int getCount() {
+            return 5;
+        }
+    }
+
+    private final class MyAdapter extends MyFragmentStatePagerAdapter {
         public MyAdapter(FragmentManager fm) {
             super(fm);
         }

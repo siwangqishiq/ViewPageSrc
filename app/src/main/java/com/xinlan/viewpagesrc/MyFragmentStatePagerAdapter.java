@@ -67,7 +67,7 @@ public abstract class MyFragmentStatePagerAdapter extends MyPagerAdapter {
         }
         while (mFragments.size() <= position) {
             mFragments.add(null);
-        }
+        }//end while
         fragment.setMenuVisibility(false);
         fragment.setUserVisibleHint(false);
         mFragments.set(position, fragment);
