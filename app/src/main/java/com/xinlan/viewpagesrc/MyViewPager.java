@@ -968,7 +968,6 @@ public class MyViewPager extends ViewGroup {
                     " Pager class: " + getClass() +
                     " Problematic adapter: " + mAdapter.getClass());
         }
-
         // Locate the currently focused item or add it if needed.
         int curIndex = -1;
         ItemInfo curItem = null;
@@ -978,7 +977,7 @@ public class MyViewPager extends ViewGroup {
                 if (ii.position == mCurItem) curItem = ii;
                 break;
             }
-        }
+        }//end for curIndex
 
         if (curItem == null && N > 0) {
             curItem = addNewItem(mCurItem, curIndex);
@@ -1004,7 +1003,7 @@ public class MyViewPager extends ViewGroup {
                         mAdapter.destroyItem(this, pos, ii.object);
                         if (DEBUG) {
                             Log.i(TAG, "populate() - destroyItem() with pos: " + pos +
-                                    " view: " + ((View) ii.object));
+                                    " view: " + ((Object) ii.object));
                         }
                         itemIndex--;
                         curIndex--;
@@ -1020,7 +1019,7 @@ public class MyViewPager extends ViewGroup {
                     curIndex++;
                     ii = itemIndex >= 0 ? mItems.get(itemIndex) : null;
                 }
-            }
+            }//end for pos
 
             float extraWidthRight = curItem.widthFactor;
             itemIndex = curIndex + 1;
@@ -1038,7 +1037,7 @@ public class MyViewPager extends ViewGroup {
                             mAdapter.destroyItem(this, pos, ii.object);
                             if (DEBUG) {
                                 Log.i(TAG, "populate() - destroyItem() with pos: " + pos +
-                                        " view: " + ((View) ii.object));
+                                        " view: " + ((Object) ii.object));
                             }
                             ii = itemIndex < mItems.size() ? mItems.get(itemIndex) : null;
                         }
@@ -1458,7 +1457,7 @@ public class MyViewPager extends ViewGroup {
                     child.measure(widthSpec, mChildHeightMeasureSpec);
                 }
             }
-        }
+        }//end for i
     }
 
     @Override

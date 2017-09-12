@@ -249,6 +249,6 @@ public abstract class MyPagerAdapter {
      * @return Proportional width for the given page position
      */
     public float getPageWidth(int position) {
-        return 1.f;
+        return 1f;
     }
 }
