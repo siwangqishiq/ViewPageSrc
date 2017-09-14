@@ -934,7 +934,8 @@ public class MyViewPager extends ViewGroup {
         // fling to a new position until we have finished the scroll to
         // that position, avoiding glitches from happening at that point.
         if (mPopulatePending) {
-            if (DEBUG) Log.i(TAG, "populate is pending, skipping for now...");
+            if (DEBUG)
+                Log.i(TAG, "populate is pending, skipping for now...");
             sortChildDrawingOrder();
             return;
         }
@@ -974,7 +975,8 @@ public class MyViewPager extends ViewGroup {
         for (curIndex = 0; curIndex < mItems.size(); curIndex++) {
             final ItemInfo ii = mItems.get(curIndex);
             if (ii.position >= mCurItem) {
-                if (ii.position == mCurItem) curItem = ii;
+                if (ii.position == mCurItem)
+                    curItem = ii;
                 break;
             }
         }//end for curIndex
@@ -986,11 +988,12 @@ public class MyViewPager extends ViewGroup {
         // Fill 3x the available width or up to the number of offscreen
         // pages requested to either side, whichever is larger.
         // If we have no current item we have no work to do.
-        if (curItem != null) {
+        if (curItem != null) { //current Item Info
+            // add cache page adn remove cache page for current page left
             float extraWidthLeft = 0.f;
             int itemIndex = curIndex - 1;
             ItemInfo ii = itemIndex >= 0 ? mItems.get(itemIndex) : null;
-            final int clientWidth = getClientWidth();
+            final int clientWidth = getClientWidth();//ViewPager width value
             final float leftWidthNeeded = clientWidth <= 0 ? 0 :
                     2.f - curItem.widthFactor + (float) getPaddingLeft() / (float) clientWidth;
             for (int pos = mCurItem - 1; pos >= 0; pos--) {
@@ -998,7 +1001,7 @@ public class MyViewPager extends ViewGroup {
                     if (ii == null) {
                         break;
                     }
-                    if (pos == ii.position && !ii.scrolling) {
+                    if (pos == ii.position && !ii.scrolling) {//destory item
                         mItems.remove(itemIndex);
                         mAdapter.destroyItem(this, pos, ii.object);
                         if (DEBUG) {
@@ -1021,6 +1024,8 @@ public class MyViewPager extends ViewGroup {
                 }
             }//end for pos
 
+
+            // add cache page adn remove cache page for current page right
             float extraWidthRight = curItem.widthFactor;
             itemIndex = curIndex + 1;
             if (extraWidthRight < 2.f) {
@@ -1051,7 +1056,7 @@ public class MyViewPager extends ViewGroup {
                         extraWidthRight += ii.widthFactor;
                         ii = itemIndex < mItems.size() ? mItems.get(itemIndex) : null;
                     }//end if
-                }
+                }//end for pos
             }
 
             calculatePageOffsets(curItem, curIndex, oldCurInfo);
@@ -1837,12 +1842,13 @@ public class MyViewPager extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        System.out.println("onInterceptTouchEvent ");
+
         /*
          * This method JUST determines whether we want to intercept the motion.
          * If we return true, onMotionEvent will be called and we do the actual
          * scrolling there.
          */
-
         final int action = ev.getAction() & MotionEventCompat.ACTION_MASK;
 
         // Always take care of the touch gesture being complete.
@@ -1965,7 +1971,7 @@ public class MyViewPager extends ViewGroup {
             case MotionEventCompat.ACTION_POINTER_UP:
                 onSecondaryPointerUp(ev);
                 break;
-        }
+        }//end switch
 
         if (mVelocityTracker == null) {
             mVelocityTracker = VelocityTracker.obtain();
@@ -2009,6 +2015,7 @@ public class MyViewPager extends ViewGroup {
 
         switch (action & MotionEventCompat.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN: {
+                System.out.println("onTouchEvent ACTION_DOWN");
                 mScroller.abortAnimation();
                 mPopulatePending = false;
                 populate();
@@ -2020,14 +2027,17 @@ public class MyViewPager extends ViewGroup {
                 break;
             }
             case MotionEvent.ACTION_MOVE:
+                System.out.println("onTouchEvent ACTION_MOVE...");
                 if (!mIsBeingDragged) {
                     final int pointerIndex = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
                     final float x = MotionEventCompat.getX(ev, pointerIndex);
                     final float xDiff = Math.abs(x - mLastMotionX);
                     final float y = MotionEventCompat.getY(ev, pointerIndex);
                     final float yDiff = Math.abs(y - mLastMotionY);
+
                     if (DEBUG)
                         Log.v(TAG, "Moved x to " + x + "," + y + " diff=" + xDiff + "," + yDiff);
+
                     if (xDiff > mTouchSlop && xDiff > yDiff) {
                         if (DEBUG) Log.v(TAG, "Starting drag!");
                         mIsBeingDragged = true;
@@ -2055,6 +2065,7 @@ public class MyViewPager extends ViewGroup {
                 }
                 break;
             case MotionEvent.ACTION_UP:
+                System.out.println("onTouchEvent ACTION_UP");
                 if (mIsBeingDragged) {
                     final VelocityTracker velocityTracker = mVelocityTracker;
                     velocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
@@ -2201,7 +2212,7 @@ public class MyViewPager extends ViewGroup {
             lastOffset = offset;
             lastWidth = ii.widthFactor;
             lastItem = ii;
-        }
+        }//end for i
 
         return lastItem;
     }

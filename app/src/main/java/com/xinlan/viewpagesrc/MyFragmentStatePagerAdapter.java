@@ -177,4 +177,8 @@ public abstract class MyFragmentStatePagerAdapter extends MyPagerAdapter {
             }
         }
     }
+
+    public float getPageWidth(int position) {
+        return 1.0f;
+    }
 }//end class
